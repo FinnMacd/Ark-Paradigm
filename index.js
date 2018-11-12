@@ -1,11 +1,17 @@
 
 const express = require('express');
 const fs = require('fs');
+const socket = require('socket.io');
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(express.static('public'));
+
+const server = app.listen(port, () => console.log(`Listening on port ${port}`));
+
+const io = socket(server);
 
 //update json file
 app.put('/api/JSON', (request, response) => {
@@ -19,6 +25,7 @@ app.put('/api/JSON', (request, response) => {
     response.send(request.body);
 
     //TODO: update clients
+    io.sockets.emit('update', bodyString);
 
 });
 
@@ -39,4 +46,12 @@ app.get('/api/JSON/', (request, response) => {
 
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+io.on('connection', (socket) => {
+
+    console.log('made socket connection', socket.id);
+
+    socket.on('update', (data) =>{
+        console.log('updated');
+    });
+
+})
