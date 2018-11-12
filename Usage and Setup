@@ -1,0 +1,36 @@
+Settup:
+-----------------------------------------------------------
+
+All dependencies should be installed with npm install.
+
+Usage:
+-----------------------------------------------------------
+
+To start running the server call npm start.
+This will first run a linter over all applicable code,
+then start the application. 
+
+API Calls:
+-----------------------------------------------------------
+
+Once started, an express server handles get
+and put API calls to /api/JSON.
+
+The put call should contain a JSON object in it's
+body, and this object will replace a file on the server.
+Additionally an update event will be emited to all Clients
+listening on the server.
+
+The get call should have a header element 'key', and
+if a corresponding element in the JSON file exists
+this element will be returned to the requester
+
+Sockets/Clients:
+-----------------------------------------------------------
+
+Client sockets listening for an 'update' event will
+recieve the contents of the JSON file on the server.
+Currently when the server is running a client can be
+established by going to http://localhost:3000 on the 
+local machine, then the next time a put API call is 
+made the client webpage will update
