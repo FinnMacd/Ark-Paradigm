@@ -1,3 +1,11 @@
 module.exports = {
-    "extends": "standard"
+    "extends": "standard",
+    "overrides": [
+        {
+            "files": ["simpleSocket.js"],
+            "rules": {
+                "no-undef":"off"
+            }
+        }
+    ]
 };
