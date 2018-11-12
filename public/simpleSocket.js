@@ -1,8 +1,9 @@
 
-const socket = io.connect("http://localhost:3000");
+const io = require('socket.io-client')
+const socket = io.connect('http://localhost:3000')
 
-const main = document.getElementById('main');
+const main = document.getElementById('main')
 
 socket.on('update', (data) => {
-    main.innerHTML = '<p>'+data+'</p>';
-});
+  main.innerHTML = '<p>' + data + '</p>'
+})
